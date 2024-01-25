@@ -1,10 +1,10 @@
-import { getPage } from "./lib/utils/getPage";
-import { getSEO } from "./lib/utils/getSEO";
+import { getPage } from "../lib/utils/getPage";
+import { getSEO } from "../lib/utils/getSEO";
 import { BlockRenderer } from "@/components/blocks/BlockRenderer/BlockRenderer";
 import { notFound } from "next/navigation";
 
-export default async function Home() {
-	const data = await getPage('/');
+export default async function Home({ params }) {
+	const data = await getPage(params.slug.join('/'));
     
     if ( !data )
     {
@@ -19,8 +19,8 @@ export default async function Home() {
 };
 
 // GENERATE SEO RELATED THINGS
-export async function generateMetadata() {
-    const seo = await getSEO('/');
+export async function generateMetadata({ params }) {
+    const seo = await getSEO(params.slug.join('/'));
 
     return {
         title: seo?.title || '',
