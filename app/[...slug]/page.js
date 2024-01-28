@@ -3,7 +3,7 @@ import { getSEO } from "../lib/utils/getSEO";
 import { BlockRenderer } from "@/components/blocks/BlockRenderer/BlockRenderer";
 import { notFound } from "next/navigation";
 
-export default async function Home({ params }) {
+export default async function Page({ params }) {
 	const data = await getPage(params.slug.join('/'));
     
     if ( !data )
@@ -12,9 +12,11 @@ export default async function Home({ params }) {
     }
 
 	return (
-		<main className="flex flex-col min-h-screen">
-			<BlockRenderer blocks={data} />
-		</main>
+        <>
+            <main className="flex flex-col mt-[75px] lg:mt-[93px]">
+                <BlockRenderer blocks={data} />
+            </main>
+        </>
 	);
 };
 

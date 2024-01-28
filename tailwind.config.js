@@ -17,6 +17,7 @@ module.exports = {
 				current: 'currentColor',
 				'primary': '#F7666F',
 				'secondary': '#3D63EA',
+				'tertiary': '#57007B',
 				'white': '#ffffff',
 				'black': '#000000',
 				'gray': {
@@ -24,6 +25,11 @@ module.exports = {
 					700: '#4A5568',
 					900: '#1A202C',
 				},
+				'shade': '#E7DAED',
+				'shade-light': '#F9F9FF',
+				'shade-green': '#F0FFF7',
+				'shade-pink': '#FFF4F4',
+				'shadebg': '#E7DAED',
 			},
 		}
 	},

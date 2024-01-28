@@ -8,6 +8,9 @@ export const getPage = async (uri) => {
                     ... on Page {
                         blocks(postTemplate: false)
                     }
+                    ... on CaseStudy {
+                        blocks(postTemplate: false)
+                    }
                 }
             }
         `,

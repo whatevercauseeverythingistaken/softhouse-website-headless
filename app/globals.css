@@ -4,6 +4,14 @@
 
 :root {
 	--navbar-z-index: 10000;
+	--gradient-primary: linear-gradient(225deg, #F76680 0%, #57007B 100%);
+
+	/* SWIPER STYLES */
+	--swiper-pagination-bullet-horizontal-gap: 0.09375rem;
+	--swiper-pagination-color: var(--gradient-primary);
+	--swiper-pagination-bullet-width: 1.125rem;
+	--swiper-pagination-bullet-height: 1.125rem;
+	--swiper-pagination-bullet-inactive-opacity: 1;
 }
 
 body {
@@ -26,6 +34,32 @@ body {
 		px-[1.5625rem]
 	}
 	/* Headings */
+	h1, .h1 {
+		@apply
+		text-[2rem]
+		lg:text-[3.3125rem]
+	}
+	h1 .lite, .h1 .lite {
+		@apply
+		text-[1.69811320rem]
+		lg:text-[2.8125rem]
+	}
+	h2, .h2 {
+		@apply
+		text-2xl
+		lg:text-4xl
+		font-bold
+		leading-[1.52777777]
+		lg:leading-[1.52777777]
+	}
+	h3, .h3 {
+		@apply
+		text-[1.16666666rem]
+		lg:text-[1.75rem]
+		font-semibold
+		leading-[2.375]
+		lg:leading-[2.375]
+	}
 	h5, .h5 {
 		@apply
 		text-gray-700
@@ -71,6 +105,68 @@ body {
 		lg:focus-visible:before:opacity-100
 		lg:focus-visible:after:opacity-100
 	}
+	.btn.btn-2 {
+		@apply
+		relative
+		bg-secondary
+		leading-5
+		rounded-[5px]
+		py-[1.1875rem]
+		px-[1.875rem]
+		transition-[opacity]
+		duration-150
+		lg:hover:opacity-80
+		lg:focus-visible:opacity-80
+	}
+	.arrow-btn {
+		@apply
+		relative
+		inline-flex
+		text-tertiary
+		font-semibold
+		pr-[2.4375rem]
+		cursor-pointer
+		after:absolute
+		after:top-[50%]
+		after:right-0
+		after:min-w-[1.5rem]
+		after:max-w-[1.5rem]
+		after:w-[1.5rem]
+		after:min-h-[1.5rem]
+		after:max-h-[1.5rem]
+		after:h-[1.5rem]
+		after:bg-current
+		after:mask-[url(../public/icons/arrow-right-line.svg)]
+		after:mask-position-center 
+		after:mask-size-cover 
+		after:mask-no-repeat
+		after:transform
+		after:translate-y-[-50%]
+		after:transition
+		after:duration-150
+		lg:hover:after:translate-x-[-50%]
+		lg:focus-visible:after:translate-x-[-50%]
+	}
+	.arrow-btn.smaller {
+		@apply
+		text-sm
+		font-medium
+		pr-[1.3125rem]
+		after:min-w-[1rem]
+		after:max-w-[1rem]
+		after:w-[1rem]
+		after:min-h-[1rem]
+		after:max-h-[1rem]
+		after:h-[1rem]
+		after:mask-[url(../public/icons/icon-chevron-right.svg)]
+	}
+	.arrow-btn.arrow-btn-gradient-primary {
+		@apply
+		text-transparent
+		bg-[linear-gradient(225deg,_#F76680_0%,_#57007B_100%)]
+		bg-clip-text
+		after:bg-[linear-gradient(225deg,_#F76680_0%,_#57007B_100%)]
+	}
 	/* WYSIWYG */
 	.wysiwyg > p {
 		@apply
@@ -79,5 +175,43 @@ body {
 	.wysiwyg > p + p {
 		@apply
 		mt-5
+	}
+	/* Decoratives */
+	.decorative-sphere {
+		@apply
+		absolute  
+		min-w-[4.5rem]
+		max-w-[4.5rem]
+		w-[4.5rem]
+		min-h-[2.25rem]
+		max-h-[2.25rem]
+		h-[2.25rem]
+		overflow-hidden 
+		before:absolute
+		before:left-0
+		before:min-w-full
+		before:max-w-full
+		before:w-full
+		before:min-h-[200%]
+		before:max-h-[200%]
+		before:h-[200%]
+		before:bg-[linear-gradient(225deg,_#F76680_0%,_#57007B_100%)]
+		before:rounded-[50%]
+	}
+	.decorative-sphere.top {
+		@apply
+		top-0
+		before:bottom-0
+	}
+	.decorative-sphere.bottom {
+		@apply
+		bottom-0
+		before:top-0
+	}
+	.primary-gradient-text {
+		@apply
+		text-transparent
+		bg-[linear-gradient(225deg,_#F76680_0%,_#57007B_100%)]
+		bg-clip-text
 	}
 }
