@@ -12,6 +12,7 @@
     "@apollo/client": "^3.8.10",
     "@pyncz/tailwind-mask-image": "^2.0.0",
     "graphql": "^16.8.1",
+    "he": "^1.2.0",
     "html-react-parser": "^5.1.1",
     "next": "14.1.0",
     "react": "^18",

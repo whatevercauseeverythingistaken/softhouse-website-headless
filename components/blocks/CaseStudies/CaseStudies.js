@@ -8,7 +8,7 @@ import Link from 'next/link';
 import ArrowButton from '@/components/ui/ArrowButton/ArrowButton';
 
 const CaseStudies = ({ data }) => {
-    console.log(data);
+    // console.log(data);
 
     return (
         <>

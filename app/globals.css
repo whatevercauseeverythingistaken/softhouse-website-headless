@@ -5,6 +5,11 @@
 :root {
 	--navbar-z-index: 10000;
 	--gradient-primary: linear-gradient(225deg, #F76680 0%, #57007B 100%);
+	--gradient-yellow: linear-gradient(225deg, #FFEF5E 0%, #F7936F 100%);
+	--gradient-dark: linear-gradient(225deg, #29272E 0%, #27272E 100%);
+	--gradient-blue: linear-gradient(225deg, #68DBF2 0%, #509CF5 100%);
+	--gradient-pink: linear-gradient(225deg, #FF92AE 0%, #FF3D9A 100%);
+	--gradient-green: linear-gradient(225deg, #67E9F1 0%, #67E9F1 100%);
 
 	/* SWIPER STYLES */
 	--swiper-pagination-bullet-horizontal-gap: 0.09375rem;
@@ -57,8 +62,13 @@ body {
 		text-[1.16666666rem]
 		lg:text-[1.75rem]
 		font-semibold
-		leading-[2.375]
-		lg:leading-[2.375]
+		leading-[1.35714285]
+		lg:leading-[1.35714285]
+	}
+	h4, .h4 {
+		@apply
+		text-xl
+		font-semibold
 	}
 	h5, .h5 {
 		@apply
@@ -163,9 +173,9 @@ body {
 	.arrow-btn.arrow-btn-gradient-primary {
 		@apply
 		text-transparent
-		bg-[linear-gradient(225deg,_#F76680_0%,_#57007B_100%)]
+		bg-[image:var(--gradient-primary)]
 		bg-clip-text
-		after:bg-[linear-gradient(225deg,_#F76680_0%,_#57007B_100%)]
+		after:bg-[image:var(--gradient-primary)]
 	}
 	/* WYSIWYG */
 	.wysiwyg > p {
@@ -175,6 +185,44 @@ body {
 	.wysiwyg > p + p {
 		@apply
 		mt-5
+	}
+	.wysiwyg a {
+		@apply
+		text-transparent
+		bg-[image:var(--gradient-primary)]
+		bg-clip-text
+		bg-[position:0%_0%]
+		bg-[size:200%_200%]
+		transition-[background-position]
+		duration-150
+		lg:hover:bg-[position:100%_100%]
+		lg:focus-visible:bg-[position:100%_100%]
+	}
+	.wysiwyg blockquote {
+		@apply
+		relative
+		text-transparent
+		text-sm
+		leading-[1.875]
+		italic
+		bg-[image:var(--gradient-primary)]
+		bg-clip-text
+		pl-[1.125rem]
+		lg:pr-20
+		before:absolute
+		before:top-0
+		before:left-0
+		before:min-w-[0.1875rem]
+		before:max-w-[0.1875rem]
+		before:w-[0.1875rem]
+		before:min-h-full
+		before:max-h-full
+		before:h-full
+		before:bg-[image:var(--gradient-primary)]
+	}
+	.wysiwyg * + blockquote {
+		@apply
+		mt-[1.25rem]
 	}
 	/* Decoratives */
 	.decorative-sphere {

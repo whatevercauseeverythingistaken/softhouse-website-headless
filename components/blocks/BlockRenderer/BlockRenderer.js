@@ -4,6 +4,8 @@ import AboutUs from "../AboutUs/AboutUs";
 import PartnersSlider from "../PartnersSlider/PartnersSlider";
 import OpinionsSlider from "../OpinionsSlider/OpinionsSlider";
 import CaseStudies from "../CaseStudies/CaseStudies";
+import ClientQuotes from "../ClientQuotes/ClientQuotes";
+import Approach from "../Approach/Approach";
 
 export const BlockRenderer = ({ blocks }) => {
 	return blocks.map(block => {
@@ -59,6 +61,20 @@ export const BlockRenderer = ({ blocks }) => {
 				console.log('CASE STUDIES: ', block);
 				return (
 					<CaseStudies key={block.id} data={block?.attributes?.data || {}} />
+				);
+			}
+			// Client quotes
+			case 'acf/clientquotes': {
+				console.log('CLIENT QUOTES: ', block);
+				return (
+					<ClientQuotes key={block.id} data={block?.attributes?.data || {}} />
+				);
+			}
+			// Development & Design approach
+			case 'acf/approach': {
+				console.log('APPROACH: ', block);
+				return (
+					<Approach key={block.id} data={block?.attributes?.data || {}} />
 				);
 			}
 			// DEFAULT CASE: UNKNOW BLOCK
