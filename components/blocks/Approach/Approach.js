@@ -4,10 +4,9 @@ import { v4 as uuid } from 'uuid';
 import getBlockRepeaterFields from '@/app/lib/utils/getBlockRepeaterFields';
 import safelySetInnerHTML from "@/app/lib/utils/safelySetInnerHTML";
 import DecorativeHeading from "@/components/ui/DecorativeHeading/DecorativeHeading";
-import Image from 'next/image';
 
 const Approach = ({ data }) => {
-    console.log(data);
+    // console.log(data);
 
     const bgs = getBlockRepeaterFields(data, [data?.blocks, 'blocks'], 'icon_bg') || [];
     const icons = getBlockRepeaterFields(data, [data?.blocks, 'blocks'], 'icon') || [];

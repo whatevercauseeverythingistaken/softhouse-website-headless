@@ -6,6 +6,7 @@ import OpinionsSlider from "../OpinionsSlider/OpinionsSlider";
 import CaseStudies from "../CaseStudies/CaseStudies";
 import ClientQuotes from "../ClientQuotes/ClientQuotes";
 import Approach from "../Approach/Approach";
+import TechStack from "../TechStack/TechStack";
 
 export const BlockRenderer = ({ blocks }) => {
 	return blocks.map(block => {
@@ -75,6 +76,13 @@ export const BlockRenderer = ({ blocks }) => {
 				console.log('APPROACH: ', block);
 				return (
 					<Approach key={block.id} data={block?.attributes?.data || {}} />
+				);
+			}
+			// Tech stack
+			case 'acf/techstack': {
+				console.log('TECH STACK: ', block);
+				return (
+					<TechStack key={block.id} tabsId={block.id} data={block?.attributes?.data || {}} />
 				);
 			}
 			// DEFAULT CASE: UNKNOW BLOCK
