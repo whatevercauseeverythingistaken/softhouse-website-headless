@@ -46,7 +46,7 @@ const Approach = ({ data }) => {
                     <ul className="list-none grid grid-cols-1 lg:grid-cols-2 gap-[1.5625rem] mt-20">
                         {!!blocksFixed && blocksFixed.map(item => (
                             <li key={uuid()}>
-                                <div className="flex gap-[1.5625rem] bg-gray-50 border border-shade px-[2.125rem] py-[3.75rem] h-full">
+                                <div className="flex flex-col lg:flex-row gap-[1.5625rem] bg-gray-50 border border-shade px-[2.125rem] py-[3.75rem] h-full">
                                     {/* Icon col */}
                                     <div className="flex">
                                         <div 

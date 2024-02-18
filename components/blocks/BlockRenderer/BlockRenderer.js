@@ -7,6 +7,7 @@ import CaseStudies from "../CaseStudies/CaseStudies";
 import ClientQuotes from "../ClientQuotes/ClientQuotes";
 import Approach from "../Approach/Approach";
 import TechStack from "../TechStack/TechStack";
+import DevSteps from "../DevSteps/DevSteps";
 
 export const BlockRenderer = ({ blocks }) => {
 	return blocks.map(block => {
@@ -83,6 +84,13 @@ export const BlockRenderer = ({ blocks }) => {
 				console.log('TECH STACK: ', block);
 				return (
 					<TechStack key={block.id} tabsId={block.id} data={block?.attributes?.data || {}} />
+				);
+			}
+			// Dev steps
+			case 'acf/devsteps': {
+				console.log('DEV STEPS: ', block);
+				return (
+					<DevSteps key={block.id} data={block?.attributes?.data || {}} />
 				);
 			}
 			// DEFAULT CASE: UNKNOW BLOCK

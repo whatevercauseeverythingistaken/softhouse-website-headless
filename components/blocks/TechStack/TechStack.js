@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import getBlockRepeaterFields from '@/app/lib/utils/getBlockRepeaterFields';
 import safelySetInnerHTML from "@/app/lib/utils/safelySetInnerHTML";
@@ -31,11 +31,11 @@ const TechStack = ({ tabsId, data }) => {
         }
     });
 
-    console.log("TABS FIXED: ", tabsFixed);
+    // console.log("TABS FIXED: ", tabsFixed);
 
     return (
         <>
-            <section className="approach-section py-10 lg:py-20">
+            <section className="tech-stack-section py-10 lg:py-20">
                 <div className="container">
                     {/* Heading */}
                     {!!data?.heading && (
@@ -55,12 +55,16 @@ const TechStack = ({ tabsId, data }) => {
                                         className={`
                                             relative
                                             text-lg
-                                            
-                                            ${(`${tabsId}_${index}` === activeTab) && `
+                                        `}
+                                    >
+                                        <span
+                                            className={`
                                                 text-transparent
                                                 font-semibold
                                                 bg-[image:var(--gradient-primary)]
                                                 bg-clip-text
+                                                transition-[opacity]
+                                                duration-150
                                                 before:absolute
                                                 before:bottom-0
                                                 before:left-[50%]
@@ -73,10 +77,33 @@ const TechStack = ({ tabsId, data }) => {
                                                 before:bg-[image:var(--gradient-primary)] 
                                                 before:transform
                                                 before:translate-x-[-50%]
+                                                opacity-0
+
+                                                ${`${tabsId}_${index}` === activeTab && `
+                                                    opacity-100
+                                                `}
                                             `}
-                                        `}
-                                    >
-                                        {item.label}
+                                        >
+                                            {item.label}
+                                        </span>
+                                        <span
+                                            className={`
+                                                absolute
+                                                top-[50%]
+                                                left-[50%]
+                                                transform
+                                                translate-x-[-50%]
+                                                translate-y-[-50%]
+                                                transition-[opacity]
+                                                duration-150
+
+                                                ${`${tabsId}_${index}` === activeTab && `
+                                                    opacity-0
+                                                `}
+                                            `}
+                                        >
+                                            {item.label}
+                                        </span>
                                     </button>
                                 )}
                             </li>
