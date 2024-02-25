@@ -2,11 +2,19 @@
 
 import getBlockRepeaterFields from "@/app/lib/utils/getBlockRepeaterFields";
 import { SwiperSlider, SwiperSlide } from "@/components/functional/SwiperSlider/SwiperSlider";
+import './styles.css';
 
+// TODO
 const ServicesSlider = ({ data }) => {
+	// console.log(data);
+
 	const icons = getBlockRepeaterFields(data, [data?.services_slider_slides, 'services_slider_slides'], 'icon') || [];
 	const labels = getBlockRepeaterFields(data, [data?.services_slider_slides, 'services_slider_slides'], 'label') || [];
 	const texts = getBlockRepeaterFields(data, [data?.services_slider_slides, 'services_slider_slides'], 'text') || [];
+
+	console.log('icons: ', icons);
+	console.log('labels: ', labels);
+	console.log('texts: ', texts);
 
 	return (
 		<>

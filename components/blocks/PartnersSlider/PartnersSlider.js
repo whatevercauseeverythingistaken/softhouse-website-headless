@@ -4,6 +4,7 @@ import getBlockRepeaterFields from "@/app/lib/utils/getBlockRepeaterFields";
 import safelySetInnerHTML from "@/app/lib/utils/safelySetInnerHTML";
 import DecorativeHeading from "@/components/ui/DecorativeHeading/DecorativeHeading";
 
+// TODO
 const PartnersSlider = ({ data }) => {
     // console.log(data);
 

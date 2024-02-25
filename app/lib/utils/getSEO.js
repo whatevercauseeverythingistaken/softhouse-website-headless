@@ -9,6 +9,12 @@ export const getSEO = async (uri) => {
                             metaDesc
                         }
                     }
+                    ... on Post {
+                        seo {
+                            title
+                            metaDesc
+                        }
+                    }
                     ... on CaseStudy {
                         seo {
                             title

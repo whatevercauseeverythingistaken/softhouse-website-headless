@@ -1,6 +1,5 @@
 'use client';
 
-import getBlockRepeaterFields from '@/app/lib/utils/getBlockRepeaterFields';
 import safelySetInnerHTML from "@/app/lib/utils/safelySetInnerHTML";
 import { relativeToAbsoluteUrls } from '@/app/lib/utils/relativeToAbsoluteUrls';
 import DecorativeHeading from "@/components/ui/DecorativeHeading/DecorativeHeading";
@@ -8,22 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const BlogPosts = ({ data }) => {
-	console.log(data);
-
-	// const bgs = getBlockRepeaterFields(data, [data?.blocks, 'blocks'], 'icon_bg') || [];
-	// const icons = getBlockRepeaterFields(data, [data?.blocks, 'blocks'], 'icon') || [];
-	// const labels = getBlockRepeaterFields(data, [data?.blocks, 'blocks'], 'label') || [];
-	// const contents = getBlockRepeaterFields(data, [data?.blocks, 'blocks'], 'content') || [];
-
-	// // Get em all to one array
-	// const blocksFixed = Array.from({length: data?.blocks || 0}).map((val, index) => {
-	//     return {
-	//         icon_bg: bgs[index] || '',
-	//         icon: icons[index] || '',
-	//         label: labels[index] || '',
-	//         content: contents[index] || ''
-	//     }
-	// });
+	// console.log(data);
 
 	return (
 		<>
@@ -37,9 +21,9 @@ const BlogPosts = ({ data }) => {
 					)}
 					{/* Posts */}
 					{!!data?.posts && (
-						<ul className="list-none grid grid-cols-1 lg:grid-cols-4 gap-10 mt-[4.125rem]">
+						<ul className="list-none flex justify-center gap-10 mt-[4.125rem]">
 							{Array.isArray(data.posts) && data.posts.map(post => (
-								<li key={post?.ID || null}>
+								<li key={post?.ID || null} className="min-w-full max-w-full w-full lg:min-w-[25%] lg:max-w-[25%] lg:w-[25%]">
 									<Link 
 										href={!!post?.uri ? relativeToAbsoluteUrls(post?.uri) : '#'}
 										className="flex flex-col gap-5 group cursor-pointer"
@@ -77,8 +61,8 @@ const BlogPosts = ({ data }) => {
 													text-ellipsis 
 													transition-[color] 
 													duration-500
-													group-hover:text-transparent
-													group-focus-within:text-transparent
+													lg:group-hover:text-transparent
+													lg:group-focus-within:text-transparent
 													before:content-[var(--text-content)]
 													before:absolute 
 													before:top-0
@@ -96,8 +80,8 @@ const BlogPosts = ({ data }) => {
 													before:duration-500
 													before:z-[1]
 													before:[clip-path:polygon(0_0,_0_0,_0_100%,_0_100%)]
-													group-hover:before:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]
-													group-focus-within:before:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]
+													lg:group-hover:before:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]
+													lg:group-focus-within:before:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]
 												"
 												style={{'--text-content': `'${post.post_title}'`}}
 											>

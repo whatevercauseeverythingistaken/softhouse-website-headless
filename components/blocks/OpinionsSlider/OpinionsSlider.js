@@ -3,6 +3,7 @@
 import safelySetInnerHTML from "@/app/lib/utils/safelySetInnerHTML";
 import DecorativeHeading from "@/components/ui/DecorativeHeading/DecorativeHeading";
 
+// TODO
 const OpinionsSlider = ({data}) => {
     // console.log(data);
 

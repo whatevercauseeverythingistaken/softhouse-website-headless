@@ -1,19 +1,27 @@
+'use client';
+
+import { useEffect, useState } from "react";
+
 import { v4 as uuid } from "uuid";
 import CTAButton from "@/components/ui/CTAButton/CTAButton";
 import Image from "next/image";
 
+import TypingAnimation from "@/components/ui/TypingAnimation/TypingAnimation";
+import CursorBlinker from "@/components/ui/CursorBlinker/CursorBlinker";
+
+// ATTENTION: This is very dirty and unnecessarily complicated just for the text segments to work. Don't do this at home (or work)
 const HeroBanner = ({data}) => {
     // Get segments for heading
     const getHeadingSegments = () => {
         let segments = [];
-
+        
         const segmentClasses = {
             light: 'font-light',
             bold: 'font-extrabold',
             gradient_1: 'text-transparent font-extrabold bg-[linear-gradient(180deg,_#DE4396_0%,_rgba(13,_28,_159,_0.00)_100%)] bg-clip-text',
             gradient_2: 'text-transparent font-extrabold bg-[linear-gradient(225deg,_#F7666F_0%,_#406AFF_100%)] bg-clip-text'
         };
-
+        
         // Get rows
         if ( !!data?.heading_segments_row )
         {
@@ -36,13 +44,39 @@ const HeroBanner = ({data}) => {
                 }
             }
         }
+        
+        // Used to delay new text segment animation by the duration of previous text segment animation
+        let curDelay = 0;
+        let prevSegmentText = '';
+        let callback = undefined;
 
-        return segments.map(segment => (
-            <span key={uuid()} className={`${segmentClasses[segment.type] || ''} ${segment.text_lite ? 'lite' : ''}`}>
-                {segment.text || ''}
-            </span>
-        ));
+        return segments.map((segment, index) => {
+            curDelay = curDelay + ((prevSegmentText.length / 30) || 0);
+            prevSegmentText = segment.text;
+
+            if ( index === (segments.length - 1) )
+            {
+                callback = () => setSegmentsAnimationFinished(true);
+            }
+
+            return (
+                <span key={uuid()} className={`${segmentClasses[segment.type] || ''} ${segment.text_lite ? 'lite' : ''}`}>
+                    <TypingAnimation delay={curDelay} useBlinker={false} finishedCallback={callback}>
+                        {segment.text || ''}
+                    </TypingAnimation>
+                </span>
+            );
+        });
     };
+
+    // STATES AND SUCH
+    const [segmentsAnimationFinished, setSegmentsAnimationFinished] = useState(false);
+    const [headingSegments, setHeadingSegments] = useState([]);
+    // console.log('segments animation finished: ', segmentsAnimationFinished);
+
+    useEffect(() => {
+        setHeadingSegments(getHeadingSegments);
+    }, []);
 
     return (
         <>
@@ -55,12 +89,16 @@ const HeroBanner = ({data}) => {
                             <div className="flex flex-col">
                                 {/* Heading */}
                                 <h1>
-                                    {getHeadingSegments()}
+                                    {headingSegments}{!segmentsAnimationFinished && <CursorBlinker />}
                                 </h1>
                                 {/* Description */}
                                 {!!data?.description && (
                                     <p className="text-gray-700 text-lg mt-7">
-                                        {data.description}
+                                        {segmentsAnimationFinished && (
+                                            <TypingAnimation>
+                                                {data.description}
+                                            </TypingAnimation>
+                                        )}
                                     </p>
                                 )}
                                 {/* Button */}

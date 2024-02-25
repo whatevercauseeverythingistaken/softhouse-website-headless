@@ -1,6 +1,8 @@
 import { getMenu } from "@/app/lib/utils/getMenu";
 
 import Image from "next/image";
+import Link from "next/link";
+import { relativeToAbsoluteUrls } from "@/app/lib/utils/relativeToAbsoluteUrls";
 import NavbarMenuGroup from "./NavbarMenuGroup/NavbarMenuGroup";
 import CTAButton from "@/components/ui/CTAButton/CTAButton";
 
@@ -22,7 +24,11 @@ const Navbar = async () => {
             >
                 <div className="relative flex justify-between items-center py-2 px-2 lg:py-[1.0625rem] lg:px-[1.5625rem]">
                     {/* Logo */}
-                    <div className="flex">
+                    <Link 
+                        href={relativeToAbsoluteUrls('/')} 
+                        target="_self" 
+                        className="flex"
+                    >
                         {!!logo && (
                             <Image
                                 src={logo?.sourceUrl}
@@ -32,7 +38,7 @@ const Navbar = async () => {
                                 className="object-center object-cover"
                             />
                         )}
-                    </div>
+                    </Link>
                     {/* Items */}
                     <NavbarMenuGroup items={links || []} ctaButton={ctaButton || {}} />
                     {/* CTA Button */}

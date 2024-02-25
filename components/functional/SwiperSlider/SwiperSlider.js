@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import { register } from 'swiper/element/bundle';
-import './styles.css';
 
 export function SwiperSlider(props) {
 	const swiperRef = useRef(null);
