@@ -8,6 +8,7 @@ import ClientQuotes from "../ClientQuotes/ClientQuotes";
 import Approach from "../Approach/Approach";
 import TechStack from "../TechStack/TechStack";
 import DevSteps from "../DevSteps/DevSteps";
+import BlogPosts from "../BlogPosts/BlogPosts";
 
 export const BlockRenderer = ({ blocks }) => {
 	return blocks.map(block => {
@@ -91,6 +92,13 @@ export const BlockRenderer = ({ blocks }) => {
 				console.log('DEV STEPS: ', block);
 				return (
 					<DevSteps key={block.id} data={block?.attributes?.data || {}} />
+				);
+			}
+			// Blog Posts
+			case 'acf/blogposts': {
+				console.log('BLOG POSTS: ', block);
+				return (
+					<BlogPosts key={block.id} data={block?.attributes?.data || {}} />
 				);
 			}
 			// DEFAULT CASE: UNKNOW BLOCK

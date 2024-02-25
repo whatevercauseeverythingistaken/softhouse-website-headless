@@ -76,6 +76,12 @@ body {
 		text-lg
 		font-bold
 	}
+	h6, .h6 {
+		@apply
+		text-gray-700
+		text-base 
+		font-medium
+	}
 	/* Buttons */
 	.btn {
 		@apply
