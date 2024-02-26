@@ -22,9 +22,9 @@ const BlogPosts = ({ data }) => {
 					{/* Posts */}
 					<div className="overflow-hidden">
 						{!!data?.posts && (
-							<ul className="list-none flex justify-center mt-[4.125rem] lg:-mx-5">
+							<ul className="list-none flex flex-col gap-10 lg:gap-0 lg:flex-row lg:justify-center mt-[4.125rem] lg:-mx-5">
 								{Array.isArray(data.posts) && data.posts.map(post => (
-									<li key={post?.ID || null} className="min-w-full max-w-full w-full lg:min-w-[25%] lg:max-w-[25%] lg:w-[25%] lg:px-5">
+									<li key={post?.ID || null} className="lg:min-w-[25%] lg:max-w-[25%] lg:w-[25%] lg:px-5">
 										<Link 
 											href={!!post?.uri ? relativeToAbsoluteUrls(post?.uri) : '#'}
 											className="flex flex-col gap-5 group cursor-pointer"
