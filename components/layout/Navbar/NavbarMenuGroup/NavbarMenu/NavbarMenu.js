@@ -3,8 +3,10 @@ import { v4 as uuid } from "uuid";
 import Link from "next/link";
 
 import CTAButton from "@/components/ui/CTAButton/CTAButton";
+import { relativeToAbsoluteUrls } from "@/app/lib/utils/relativeToAbsoluteUrls";
 
 const NavbarMenu = ({ items, ctaButton, expanded }) => {
+
 	return (
 		<>
             <nav
@@ -40,7 +42,7 @@ const NavbarMenu = ({ items, ctaButton, expanded }) => {
                     {items.map(item => (
                         <li key={uuid()}>
                             <Link
-                                href={item.link?.url || '#'}
+                                href={item.link?.url ? relativeToAbsoluteUrls(item.link?.url) : '#'}
                                 target={item.link?.target || '_self'}
                                 className="
                                     block
@@ -61,7 +63,7 @@ const NavbarMenu = ({ items, ctaButton, expanded }) => {
                     ))}
                     <li className="lg:hidden px-8 pt-6">
                         <CTAButton 
-                            href={ctaButton?.url || ''}
+                            href={ctaButton?.url ? relativeToAbsoluteUrls(ctaButton?.url) : '#'}
                             target={ctaButton?.target || '_self'}
                             type={1}
                             className="w-full"

@@ -4,6 +4,7 @@ import parse from 'html-react-parser';
 import { v4 as uuid } from 'uuid';
 import Image from "next/image";
 import Link from 'next/link';
+import { relativeToAbsoluteUrls } from '@/app/lib/utils/relativeToAbsoluteUrls';
 
 const FooterTop = ({items = {}}) => {
     // console.log(items);
@@ -64,7 +65,7 @@ const FooterTop = ({items = {}}) => {
                                         {(items?.footerCol2.links || []).map(item => (
                                             <li key={uuid()}>
                                                 <Link
-                                                    href={item.link?.url || '#'}
+                                                    href={item.link?.url ? relativeToAbsoluteUrls(item.link?.url) : '#'}
                                                     target={item.link?.target || '_self'}
                                                     className="
                                                         block
