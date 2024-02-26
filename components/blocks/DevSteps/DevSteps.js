@@ -24,7 +24,33 @@ const DevSteps = ({ data }) => {
     });
 
     // Create array of block refs
-    const blockRefs = stepsFixed.map(item => useRef(null));
+    const blockRefs = useRef([]);
+
+    // Equalize object height
+    useEffect(() => {
+        // Equalize heights >= lg
+        if ( breakpoint !== 'md' && breakpoint !== 'sm' )
+        {
+            let targetHeight = equalHeight;
+    
+            blockRefs.current = blockRefs.current.slice(0, stepsFixed.length);
+            // console.log('blockRefs after: ', blockRefs.current);
+
+            blockRefs.current.forEach(ref => {
+                if ( ref?.getBoundingClientRect()?.height > targetHeight )
+                {
+                    targetHeight = ref.getBoundingClientRect().height;
+                }
+            });
+    
+            setEqualHeight(targetHeight);
+        }
+        // Reset heights on < lg
+        else
+        {
+            setEqualHeight(null);
+        }
+    }, [breakpoint, stepsFixed]);
 
     // Get block fields
     const renderSteps = () => {
@@ -77,7 +103,7 @@ const DevSteps = ({ data }) => {
                 >
                     {/* Col item 1 */}
                     <div 
-                        ref={blockRefs[curIndex]}
+                        ref={el => blockRefs.current.push(el)}
                         className="flex flex-col gap-[1.375rem] bg-white border border-shade rounded-[0.5625rem] p-[1.59375rem] lg:mr-[3.4375rem]"
                         style={{minHeight: `${!!equalHeight ? equalHeight + 'px' : '0'}`, maxHeight: `${!!equalHeight ? equalHeight + 'px' : 'initial'}`, height: `${!!equalHeight ? equalHeight + 'px' : 'auto'}`}}
                     >
@@ -90,7 +116,7 @@ const DevSteps = ({ data }) => {
                     </div>
                     {/* Col item 2 */}
                     <div 
-                        ref={blockRefs[curIndex+1]}
+                        ref={el => blockRefs.current.push(el)}
                         className="flex flex-col gap-[1.375rem] bg-white border border-shade rounded-[0.5625rem] p-[1.59375rem] lg:ml-[3.4375rem]"
                         style={{minHeight: `${!!equalHeight ? equalHeight + 'px' : '0'}`, maxHeight: `${!!equalHeight ? equalHeight + 'px' : 'initial'}`, height: `${!!equalHeight ? equalHeight + 'px' : 'auto'}`}}
                     >
@@ -110,29 +136,6 @@ const DevSteps = ({ data }) => {
 
         return output;
     };
-
-    // Equalize object height
-    useEffect(() => {
-        // Equalize heights >= lg
-        if ( breakpoint !== 'md' && breakpoint !== 'sm' )
-        {
-            let targetHeight = equalHeight;
-    
-            blockRefs.forEach(ref => {
-                if ( ref.current.getBoundingClientRect().height > targetHeight )
-                {
-                    targetHeight = ref.current.getBoundingClientRect().height;
-                }
-            });
-    
-            setEqualHeight(targetHeight);
-        }
-        // Reset heights on < lg
-        else
-        {
-            setEqualHeight(null);
-        }
-    }, [breakpoint]);
 
     return (
         <>
