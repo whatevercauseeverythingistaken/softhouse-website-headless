@@ -89,26 +89,13 @@ const TechStack = ({ tabsId, data }) => {
                                             text-lg
                                         `}
                                     >
+                                        {/* Active text */}
                                         <span
                                             className={`
                                                 text-transparent
                                                 font-semibold
                                                 bg-[image:var(--gradient-primary)]
                                                 bg-clip-text
-                                                transition-[opacity]
-                                                duration-150
-                                                before:absolute
-                                                before:bottom-0
-                                                before:left-[50%]
-                                                before:min-w-[32.89473684%]
-                                                before:max-w-[32.89473684%]
-                                                before:w-[32.89473684%]
-                                                before:min-h-[0.1875rem]
-                                                before:max-h-[0.1875rem]
-                                                before:h-[0.1875rem]
-                                                before:bg-[image:var(--gradient-primary)] 
-                                                before:transform
-                                                before:translate-x-[-50%]
                                                 opacity-0
 
                                                 ${`${tabsId}_${index}` === activeTab && `
@@ -118,6 +105,51 @@ const TechStack = ({ tabsId, data }) => {
                                         >
                                             {item.label}
                                         </span>
+                                        {/* Active bar */}
+                                        <AnimatePresence>
+                                            {`${tabsId}_${index}` === activeTab && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, scaleX: '0' }}
+                                                    whileInView={{ opacity: 1, scaleX: '100%' }}
+                                                    exit={{ opacity: 0, scaleX: '0' }}
+                                                    viewport={{once: true}}
+                                                    transition={{
+                                                        type: "spring",
+                                                        delay: 0,
+                                                        duration: 0.8
+                                                    }}
+                                                    className="
+                                                        absolute
+                                                        top-0
+                                                        left-0
+                                                        min-w-full
+                                                        max-w-full
+                                                        w-full
+                                                        min-h-full
+                                                        max-h-full
+                                                        h-full
+                                                    "
+                                                >
+                                                    <span
+                                                        className={`
+                                                            absolute
+                                                            bottom-0
+                                                            left-[50%]
+                                                            min-w-[32.89473684%]
+                                                            max-w-[32.89473684%]
+                                                            w-[32.89473684%]
+                                                            min-h-[0.1875rem]
+                                                            max-h-[0.1875rem]
+                                                            h-[0.1875rem]
+                                                            bg-[image:var(--gradient-primary)] 
+                                                            transform
+                                                            translate-x-[-50%]
+                                                        `}
+                                                    ></span>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                        {/* Regular text */}
                                         <span
                                             className={`
                                                 absolute
@@ -143,36 +175,36 @@ const TechStack = ({ tabsId, data }) => {
                     </ul>
                     {/* Tab contents */}
                     {!!tabsFixed && (
-                        <motion.ul 
-                            key={`${activeTab}_content`}
-                            initial={{ opacity: 0, translateY: '-100%' }}
-                            whileInView={{ opacity: 1, translateY: 0 }}
-                            viewport={{once: true}}
-                            transition={{
-                                type: "spring",
-                                delay: 0.2,
-                                duration: 0.8
-                            }}
-                            className="list-none flex flex-wrap justify-center gap-6 lg:gap-[3.75rem] mt-10 lg:mt-[4.5rem]"
-                        >
-                            {!!tabsFixed[activeTab.split('_')[1]]?.logos && tabsFixed[activeTab.split('_')[1]]?.logos.map(logo => {
-                                if ( !!logo?.url )
-                                {
-                                    return (
-                                        <li key={uuid()} className="flex">
-                                            <Image src={logo.url} alt={logo?.alt || ''} width={166} height={94} 
-                                                className="
-                                                    object-center 
-                                                    min-h-[5.875rem] 
-                                                    max-h-[5.875rem] 
-                                                    h-[5.875rem]
-                                                "
-                                            />
-                                        </li>
-                                    )
-                                }
-                            })}
-                        </motion.ul>
+                            <motion.ul 
+                                key={`${activeTab}_content`}
+                                initial={{ opacity: 0, translateY: '-100%', height: '0' }}
+                                whileInView={{ opacity: 1, translateY: 0, height: 'auto' }}
+                                viewport={{once: true}}
+                                transition={{
+                                    type: "spring",
+                                    delay: 0.2,
+                                    duration: 0.8
+                                }}
+                                className="list-none flex flex-wrap justify-center gap-6 lg:gap-[3.75rem] mt-10 lg:mt-[4.5rem]"
+                            >
+                                {!!tabsFixed[activeTab.split('_')[1]]?.logos && tabsFixed[activeTab.split('_')[1]]?.logos.map(logo => {
+                                    if ( !!logo?.url )
+                                    {
+                                        return (
+                                            <li key={uuid()} className="flex">
+                                                <Image src={logo.url} alt={logo?.alt || ''} width={166} height={94} 
+                                                    className="
+                                                        object-center 
+                                                        min-h-[5.875rem] 
+                                                        max-h-[5.875rem] 
+                                                        h-[5.875rem]
+                                                    "
+                                                />
+                                            </li>
+                                        )
+                                    }
+                                })}
+                            </motion.ul>
                     )}
                 </div>
             </section>
