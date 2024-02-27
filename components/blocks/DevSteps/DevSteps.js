@@ -6,6 +6,7 @@ import { BREAKPOINTS } from "@/app/lib/utils/breakpoints";
 import safelySetInnerHTML from "@/app/lib/utils/safelySetInnerHTML";
 import getBlockRepeaterFields from "@/app/lib/utils/getBlockRepeaterFields";
 import DecorativeHeading from "@/components/ui/DecorativeHeading/DecorativeHeading";
+import { motion } from "framer-motion";
 
 const DevSteps = ({ data }) => {
     const [equalHeight, setEqualHeight] = useState(null);
@@ -102,7 +103,15 @@ const DevSteps = ({ data }) => {
                     "
                 >
                     {/* Col item 1 */}
-                    <div 
+                    <motion.div 
+                        initial={{ opacity: 0, translateY: '-100%' }}
+                        whileInView={{ opacity: 1, translateY: '0' }}
+                        viewport={{once: true}}
+                        transition={{
+                            type: "spring",
+                            delay: ((curIndex + 1) * 0.1),
+                            duration: 0.8
+                        }}
                         ref={el => blockRefs.current.push(el)}
                         className="flex flex-col gap-[1.375rem] bg-white border border-shade rounded-[0.5625rem] p-[1.59375rem] lg:mr-[3.4375rem]"
                         style={{minHeight: `${!!equalHeight ? equalHeight + 'px' : '0'}`, maxHeight: `${!!equalHeight ? equalHeight + 'px' : 'initial'}`, height: `${!!equalHeight ? equalHeight + 'px' : 'auto'}`}}
@@ -113,9 +122,17 @@ const DevSteps = ({ data }) => {
                         <p className="text-xs text-gray-600 line-clamp-4 text-ellipsis">
                             {stepsFixed[curIndex]?.content}
                         </p>
-                    </div>
+                    </motion.div>
                     {/* Col item 2 */}
-                    <div 
+                    <motion.div 
+                        initial={{ opacity: 0, translateY: '100%' }}
+                        whileInView={{ opacity: 1, translateY: '0' }}
+                        viewport={{once: true}}
+                        transition={{
+                            type: "spring",
+                            delay: ((curIndex + 2) * 0.1),
+                            duration: 0.8
+                        }}
                         ref={el => blockRefs.current.push(el)}
                         className="flex flex-col gap-[1.375rem] bg-white border border-shade rounded-[0.5625rem] p-[1.59375rem] lg:ml-[3.4375rem]"
                         style={{minHeight: `${!!equalHeight ? equalHeight + 'px' : '0'}`, maxHeight: `${!!equalHeight ? equalHeight + 'px' : 'initial'}`, height: `${!!equalHeight ? equalHeight + 'px' : 'auto'}`}}
@@ -126,7 +143,7 @@ const DevSteps = ({ data }) => {
                         <p className="text-xs text-gray-600 line-clamp-4 text-ellipsis">
                             {stepsFixed[curIndex+1]?.content}
                         </p>
-                    </div>
+                    </motion.div>
                 </div>
             );
 
@@ -139,13 +156,24 @@ const DevSteps = ({ data }) => {
 
     return (
         <>
-            <section className="dev-steps py-10 lg:py-20">
+            <section className="dev-steps py-10 lg:py-20 overflow-hidden">
                 <div className="container">
                     {/* Heading */}
                     {!!data?.heading && (
-                        <DecorativeHeading alignment="center">
-                            {safelySetInnerHTML(data.heading)}
-                        </DecorativeHeading>
+                        <motion.div
+                            initial={{ opacity: 0, translateY: '-100%' }}
+                            whileInView={{ opacity: 1, translateY: '0' }}
+                            viewport={{once: true}}
+                            transition={{
+                                type: "spring",
+                                delay: 0,
+                                duration: 0.8
+                            }}
+                        >
+                            <DecorativeHeading alignment="center">
+                                {safelySetInnerHTML(data.heading)}
+                            </DecorativeHeading>
+                        </motion.div>
                     )}
                     {/* Steps */}
                     <div 

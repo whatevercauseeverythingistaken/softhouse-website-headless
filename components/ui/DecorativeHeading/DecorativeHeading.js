@@ -1,5 +1,3 @@
-import safelySetInnerHTML from "@/app/lib/utils/safelySetInnerHTML";
-
 const DecorativeHeading = ({children, className, alignment = 'left', ...rest}) => {
     const alignKey = {
         left: 'before:left-0',

@@ -1,10 +1,12 @@
 'use client';
 
+import { v4 as uuid } from "uuid";
 import safelySetInnerHTML from "@/app/lib/utils/safelySetInnerHTML";
 import { relativeToAbsoluteUrls } from '@/app/lib/utils/relativeToAbsoluteUrls';
 import DecorativeHeading from "@/components/ui/DecorativeHeading/DecorativeHeading";
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from "framer-motion";
 
 const BlogPosts = ({ data }) => {
 	// console.log(data);
@@ -15,16 +17,38 @@ const BlogPosts = ({ data }) => {
 				<div className="container">
 					{/* Heading */}
 					{!!data?.heading && (
-						<DecorativeHeading alignment="center">
-							{safelySetInnerHTML(data.heading)}
-						</DecorativeHeading>
+						<motion.div
+							initial={{ opacity: 0, translateY: '-100%' }}
+							whileInView={{ opacity: 1, translateY: '0' }}
+							viewport={{once: true}}
+							transition={{
+								type: "spring",
+								delay: 0,
+								duration: 0.8
+							}}
+						>
+							<DecorativeHeading alignment="center">
+								{safelySetInnerHTML(data.heading)}
+							</DecorativeHeading>
+						</motion.div>
 					)}
 					{/* Posts */}
 					<div className="overflow-hidden">
 						{!!data?.posts && (
 							<ul className="list-none flex flex-col gap-10 lg:gap-0 lg:flex-row lg:justify-center mt-[4.125rem] lg:-mx-5">
-								{Array.isArray(data.posts) && data.posts.map(post => (
-									<li key={post?.ID || null} className="lg:min-w-[25%] lg:max-w-[25%] lg:w-[25%] lg:px-5">
+								{Array.isArray(data.posts) && data.posts.map((post, index) => (
+									<motion.li 
+										initial={{ opacity: 0, translateY: '-100%' }}
+										whileInView={{ opacity: 1, translateY: '0' }}
+										viewport={{once: true}}
+										transition={{
+											type: "spring",
+											delay: ((index + 1) * 0.1),
+											duration: 0.8
+										}}
+										key={post?.ID || uuid()} 
+										className="lg:min-w-[25%] lg:max-w-[25%] lg:w-[25%] lg:px-5"
+									>
 										<Link 
 											href={!!post?.uri ? relativeToAbsoluteUrls(post?.uri) : '#'}
 											className="flex flex-col gap-5 group cursor-pointer"
@@ -95,7 +119,7 @@ const BlogPosts = ({ data }) => {
 												</p>
 											</div>
 										</Link>
-									</li>
+									</motion.li>
 								))}
 							</ul>
 						)}

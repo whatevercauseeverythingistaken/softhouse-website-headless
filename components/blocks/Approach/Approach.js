@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import getBlockRepeaterFields from '@/app/lib/utils/getBlockRepeaterFields';
 import safelySetInnerHTML from "@/app/lib/utils/safelySetInnerHTML";
 import DecorativeHeading from "@/components/ui/DecorativeHeading/DecorativeHeading";
+import { motion } from 'framer-motion';
 
 const Approach = ({ data }) => {
     // console.log(data);
@@ -34,18 +35,39 @@ const Approach = ({ data }) => {
 
     return (
         <>
-            <section className="approach-section py-10 lg:py-[5.5625rem] bg-shade-light border-t border-b border-t-shade border-b-shade">
+            <section className="approach-section py-10 lg:py-[5.5625rem] bg-shade-light border-t border-b border-t-shade border-b-shade overflow-hidden">
                 <div className="container">
                     {/* Heading */}
                     {!!data?.heading && (
-                        <DecorativeHeading alignment="center">
-                            {safelySetInnerHTML(data.heading)}
-                        </DecorativeHeading>
+                        <motion.div
+                            initial={{ opacity: 0, translateY: '-100%' }}
+                            whileInView={{ opacity: 1, translateY: '0' }}
+                            viewport={{once: true}}
+                            transition={{
+                                type: "spring",
+                                delay: 0,
+                                duration: 0.8
+                            }}
+                        >
+                            <DecorativeHeading alignment="center">
+                                {safelySetInnerHTML(data.heading)}
+                            </DecorativeHeading>
+                        </motion.div>
                     )}
                     {/* Blocks */}
                     <ul className="list-none grid grid-cols-1 lg:grid-cols-2 gap-[1.5625rem] mt-20">
-                        {!!blocksFixed && blocksFixed.map(item => (
-                            <li key={uuid()}>
+                        {!!blocksFixed && blocksFixed.map((item, index) => (
+                            <motion.li 
+                                initial={{ opacity: 0, translateX: '-100%' }}
+                                whileInView={{ opacity: 1, translateX: '0' }}
+                                viewport={{once: true}}
+                                transition={{
+                                    type: "spring",
+                                    delay: ((index + 1) * 0.1),
+                                    duration: 0.8
+                                }}
+                                key={uuid()}
+                            >
                                 <div className="flex flex-col lg:flex-row gap-[1.5625rem] bg-gray-50 border border-shade px-[2.125rem] py-[3.75rem] h-full">
                                     {/* Icon col */}
                                     <div className="flex">
@@ -95,7 +117,7 @@ const Approach = ({ data }) => {
                                         )}
                                     </div>
                                 </div>
-                            </li>
+                            </motion.li>
                         ))}
                     </ul>
                 </div>

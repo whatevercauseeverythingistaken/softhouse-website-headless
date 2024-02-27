@@ -6,6 +6,7 @@ import he from 'he';
 import DecorativeHeading from "@/components/ui/DecorativeHeading/DecorativeHeading";
 import getBlockRepeaterFields from "@/app/lib/utils/getBlockRepeaterFields";
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const ClientQuotes = ({ data }) => {
     // console.log(data);
@@ -33,36 +34,78 @@ const ClientQuotes = ({ data }) => {
 
     return (
         <>
-            <section className="client-quotes-section py-10 lg:py-20">
+            <section className="client-quotes-section py-10 lg:py-20 overflow-hidden">
                 <div className="container">
                     {/* Heading */}
                     {!!data?.heading && (
-                        <DecorativeHeading alignment="center">
-                            {safelySetInnerHTML(data.heading)}
-                        </DecorativeHeading>
+                        <motion.div
+                            initial={{ opacity: 0, translateY: '-100%' }}
+                            whileInView={{ opacity: 1, translateY: '0' }}
+                            viewport={{once: true}}
+                            transition={{
+                                type: "spring",
+                                delay: 0,
+                                duration: 0.8
+                            }}
+                        >
+                            <DecorativeHeading alignment="center">
+                                {safelySetInnerHTML(data.heading)}
+                            </DecorativeHeading>
+                        </motion.div>
                     )}
                     {/* Quotes */}
                     <ul className="list-none flex flex-col gap-16 lg:gap-[5.9375rem] pt-[2.0625rem] mt-10">
                         {!!quotesFixed && quotesFixed.map((item, index) => (
-                            <li key={uuid()}>
+                            <li 
+                                key={uuid()}
+                            >
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10">
                                     {/* Content col */}
                                     <div className={`order-2 ${index%2 === 0 ? 'lg:order-1' : 'lg:order-2'} flex flex-col ${index%2 === 0 ? 'lg:pr-20' : 'lg:pl-20'}`}>
                                         {/* Title */}
                                         {!!item?.title && (
-                                            <h3>
+                                            <motion.h3
+                                                initial={{ opacity: 0, translateY: '-100%' }}
+                                                whileInView={{ opacity: 1, translateY: '0' }}
+                                                viewport={{once: true}}
+                                                transition={{
+                                                    type: "spring",
+                                                    delay: ((index + 1) * 0.1),
+                                                    duration: 0.8
+                                                }}
+                                            >
                                                 {item.title}
-                                            </h3>
+                                            </motion.h3>
                                         )}
                                         {/* Content (WYSIWYG) */}
                                         {!!item?.content && (
-                                            <article className="wysiwyg mt-[1.875rem]">
+                                            <motion.article 
+                                                initial={{ opacity: 0, translateY: '-100%' }}
+                                                whileInView={{ opacity: 1, translateY: '0' }}
+                                                viewport={{once: true}}
+                                                transition={{
+                                                    type: "spring",
+                                                    delay: ((index + 1) * 0.2),
+                                                    duration: 0.8
+                                                }}
+                                                className="wysiwyg mt-[1.875rem]"
+                                            >
                                                 {safelySetInnerHTML(he.decode(item.content))}
-                                            </article>
+                                            </motion.article>
                                         )}
                                         {/* Author */}
                                         {!!item?.author && (
-                                            <div className="flex gap-[0.625rem] mt-[1.5625rem]">
+                                            <motion.div 
+                                                initial={{ opacity: 0, translateY: '-100%' }}
+                                                whileInView={{ opacity: 1, translateY: '0' }}
+                                                viewport={{once: true}}
+                                                transition={{
+                                                    type: "spring",
+                                                    delay: ((index + 1) * 0.3),
+                                                    duration: 0.8
+                                                }}
+                                                className="flex gap-[0.625rem] mt-[1.5625rem]"
+                                            >
                                                 {/* Avatar col */}
                                                 {!!item.author?.avatar?.url && (
                                                     <div className="relative min-w-[2.5625rem] max-w-[2.5625rem] w-[2.5625rem] min-h-[2.5625rem] max-h-[2.5625rem] h-[2.5625rem] rounded-[50%] overflow-hidden">
@@ -89,11 +132,13 @@ const ClientQuotes = ({ data }) => {
                                                         </p>
                                                     )}
                                                 </div>
-                                            </div>
+                                            </motion.div>
                                         )}
                                     </div>
                                     {/* Image col */}
-                                    <div className={`order-1 ${index%2 === 0 ? 'lg:order-2' : 'lg:order-1'} flex ${index%2 === 0 ? 'lg:pl-10' : 'lg:pr-10'}`}>
+                                    <div 
+                                        className={`order-1 ${index%2 === 0 ? 'lg:order-2' : 'lg:order-1'} flex ${index%2 === 0 ? 'lg:pl-10' : 'lg:pr-10'}`}
+                                    >
                                         {/* Image */}
                                         {!!item?.image?.url && (
                                             <div 
@@ -160,13 +205,26 @@ const ClientQuotes = ({ data }) => {
                                                             after:-z-10
                                                         `
                                                     }
-                                                `}>
-                                                <Image
-                                                    src={item.image.url}
-                                                    alt={item.image?.alt || ''}
-                                                    fill
-                                                    className="object-center object-cover rounded-[0.625rem]"
-                                                />
+                                                `}
+                                            >
+                                                <motion.div 
+                                                    initial={{ opacity: 0, translateX: `${index%2 === 0 ? '100%' : '-100%'}` }}
+                                                    whileInView={{ opacity: 1, translateX: '0' }}
+                                                    viewport={{once: true}}
+                                                    transition={{
+                                                        type: "spring",
+                                                        delay: ((index + 1) * 0.4),
+                                                        duration: 0.8
+                                                    }}
+                                                    className="absolute min-w-full max-w-full w-full min-h-full max-h-full h-full"
+                                                >
+                                                    <Image
+                                                        src={item.image.url}
+                                                        alt={item.image?.alt || ''}
+                                                        fill
+                                                        className="object-center object-cover rounded-[0.625rem]"
+                                                    />
+                                                </motion.div>
                                             </div>
                                         )}
                                     </div>
