@@ -175,36 +175,36 @@ const TechStack = ({ tabsId, data }) => {
                     </ul>
                     {/* Tab contents */}
                     {!!tabsFixed && (
-                            <motion.ul 
-                                key={`${activeTab}_content`}
-                                initial={{ opacity: 0, translateY: '-100%', height: '0' }}
-                                whileInView={{ opacity: 1, translateY: 0, height: 'auto' }}
-                                viewport={{once: true}}
-                                transition={{
-                                    type: "spring",
-                                    delay: 0.2,
-                                    duration: 0.8
-                                }}
-                                className="list-none flex flex-wrap justify-center gap-6 lg:gap-[3.75rem] mt-10 lg:mt-[4.5rem]"
-                            >
-                                {!!tabsFixed[activeTab.split('_')[1]]?.logos && tabsFixed[activeTab.split('_')[1]]?.logos.map(logo => {
-                                    if ( !!logo?.url )
-                                    {
-                                        return (
-                                            <li key={uuid()} className="flex">
-                                                <Image src={logo.url} alt={logo?.alt || ''} width={166} height={94} 
-                                                    className="
-                                                        object-center 
-                                                        min-h-[5.875rem] 
-                                                        max-h-[5.875rem] 
-                                                        h-[5.875rem]
-                                                    "
-                                                />
-                                            </li>
-                                        )
-                                    }
-                                })}
-                            </motion.ul>
+                        <motion.ul 
+                            key={`${activeTab}_content`}
+                            initial={{ opacity: 0, translateY: '-100%', height: '0' }}
+                            whileInView={{ opacity: 1, translateY: 0, height: 'auto' }}
+                            viewport={{once: true}}
+                            transition={{
+                                type: "spring",
+                                delay: 0.2,
+                                duration: 0.8
+                            }}
+                            className="list-none flex flex-wrap justify-center gap-6 lg:gap-[3.75rem] mt-10 lg:mt-[4.5rem]"
+                        >
+                            {!!tabsFixed[activeTab.split('_')[1]]?.logos && tabsFixed[activeTab.split('_')[1]]?.logos.map(logo => {
+                                if ( !!logo?.url )
+                                {
+                                    return (
+                                        <li key={uuid()} className="flex">
+                                            <Image src={logo.url} alt={logo?.alt || ''} width={166} height={94} 
+                                                className="
+                                                    object-center 
+                                                    min-h-[5.875rem] 
+                                                    max-h-[5.875rem] 
+                                                    h-[5.875rem]
+                                                "
+                                            />
+                                        </li>
+                                    )
+                                }
+                            })}
+                        </motion.ul>
                     )}
                 </div>
             </section>
